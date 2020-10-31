@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Navbar from './Navbar';
 import BookInfo from './BookInfo';
 import BookCatalog from './BookCatalog';
@@ -10,9 +10,11 @@ const App = () => (
   <div className="App">
     <Navbar />
     <div className="content">
-      <Route path="/" component={BookCatalog} />
-      <Route path="/info" component={BookInfo} />
-      <Route path="/about" component={About} />
+      <Switch>
+        <Route path="/info" component={BookInfo} />
+        <Route path="/about" component={About} />
+        <Route path="/" component={BookCatalog} />
+      </Switch>
     </div>
   </div>
 );
