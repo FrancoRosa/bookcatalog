@@ -11,7 +11,8 @@ const App = () => (
     <Navbar />
     <div className="content">
       <Switch>
-        <Route path="/info" component={BookInfo} />
+        <Route path="/book/:id" component={BookInfo} />
+        <Route path="/books" component={BookCatalog} />
         <Route path="/about" component={About} />
         <Route path="/" component={BookCatalog} />
       </Switch>

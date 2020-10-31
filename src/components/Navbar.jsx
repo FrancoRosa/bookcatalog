@@ -2,11 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 const Navbar = () => (
-  <div>
-    <Link to="/catalog">Catalog</Link>
-    <Link to="/info">Info</Link>
-    <Link to="/about">About</Link>
-  </div>
+  <ul>
+    <li><Link to="/books">Catalog</Link></li>
+    <li><Link to="/about">About</Link></li>
+  </ul>
 );
 
 export default Navbar;
