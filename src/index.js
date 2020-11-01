@@ -12,25 +12,35 @@ const initialState = {
     {
       id: 10,
       title: 'Sci-Fi Book',
+      author: 'Me',
       category: 'Sci-Fi',
     },
     {
       id: 20,
       title: 'Bio of a guide',
+      author: 'You',
       category: 'Biography',
     },
     {
       id: 30,
       title: 'Panic',
+      author: 'She',
       category: 'Horror',
     },
     {
-      id: 30,
+      id: 40,
       title: 'Panic Kernel',
+      author: 'He',
       category: 'Horror',
     },
   ],
   filter: 'All',
+  authors: [
+    'Me',
+    'He',
+    'She',
+    'They',
+  ]
 };
 
 const store = createStore(
