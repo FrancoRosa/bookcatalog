@@ -1,31 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import BookFilter from '../components/BookFilter'
 import { filterBooks } from '../actions'
 import BookPreview from '../components/BookPreview'
 
+class BookCatalog extends Component {
 
-const BookCatalog = ({authors, books, filter, filterBooks}) => {
-  const handleSelection = (event) => {
+  handleSelection = (event) => {
     const filter = event.target.value;
-    filterBooks(filter)
+    this.props.filterBooks(filter)
     console.log(filter)    
   }
   
-  const bookResults = (books, filter) => {
-    if (filter == 'All') return books;
-    return books.filter(book => book.author == filter) 
+  bookResults = (books, filter) => {
+    if (filter === 'All') return books;
+    return books.filter(book => book.author === filter) 
   }
 
-  return(
-    <div>
-      <h2>Catalog</h2>
-      <BookFilter authors={authors} clickHandler={handleSelection}/>
-      <ul>
-        {bookResults(books, filter).map(book => <BookPreview book={book}/>)}
-      </ul>
-    </div>
-)};
+  render() {
+    const {authors, books, filter} = this.props
+    return (
+      <div>
+        <h2>Catalog</h2>
+        <BookFilter authors={authors} clickHandler={this.handleSelection}/>
+        <ul>
+          {this.bookResults(books, filter).map(book => <BookPreview book={book}/>)}
+        </ul>
+      </div>
+    )
+  }
+};
 
 const mapStateToProps = state => ({
   books: state.books,
