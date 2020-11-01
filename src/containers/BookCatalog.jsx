@@ -5,13 +5,24 @@ import { filterBooks } from '../actions'
 import BookPreview from '../components/BookPreview'
 
 
-const BookCatalog = ({authors, books, filter}) => {
+const BookCatalog = ({authors, books, filter, filterBooks}) => {
+  const handleSelection = (event) => {
+    const filter = event.target.value;
+    filterBooks(filter)
+    console.log(filter)    
+  }
+  
+  const bookResults = (books, filter) => {
+    if (filter == 'All') return books;
+    return books.filter(book => book.author == filter) 
+  }
+
   return(
     <div>
       <h2>Catalog</h2>
-      <BookFilter authors={authors}/>
+      <BookFilter authors={authors} clickHandler={handleSelection}/>
       <ul>
-        {books.map(book => <BookPreview book={book}/>)}
+        {bookResults(books, filter).map(book => <BookPreview book={book}/>)}
       </ul>
     </div>
 )};

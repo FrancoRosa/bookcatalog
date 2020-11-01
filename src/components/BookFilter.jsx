@@ -7,6 +7,7 @@ const BookFilter = ({ clickHandler, authors }) => {
       <h2>Filter by Author</h2>
       <div>
         <select id="filter" onChange={clickHandler}>
+          <option key="0">All</option>)
           {authors.map(author => <option key={author.objectID}>{author}</option>)}
         </select>
       </div>
