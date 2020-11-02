@@ -62,7 +62,6 @@ class BookCatalog extends Component {
 
     return (
       <div>
-        <h2>Catalog</h2>
         <BookFilter authors={authors} clickHandler={this.handleSelection} />
         <ul>
           {this.bookResults(books, filter).map(

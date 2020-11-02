@@ -12,7 +12,12 @@ code {
     monospace;
 }
 
-.title{
+.title {
   padding: 0 !important;
   margin: 0 1em !important;
+}
+
+.card {
+  padding: 1em !important;
+  margin: 1em !important;
 }
