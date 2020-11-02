@@ -1,4 +1,3 @@
-
 import { SAVE_TIMESTAMP } from '../actions/index';
 
 const timestamp = (state = 0, action) => {

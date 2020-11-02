@@ -1,4 +1,3 @@
-
 import { CHANGE_FETCH_STATUS } from '../actions/index';
 
 const api = (state = 'CallingAPI', action) => {

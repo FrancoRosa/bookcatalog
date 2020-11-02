@@ -1,10 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom';
 import Navbar from './Navbar';
 import BookInfo from './BookInfo';
 import BookCatalog from '../containers/BookCatalog';
 import About from './About';
-
 
 const App = () => (
   <div className="App">

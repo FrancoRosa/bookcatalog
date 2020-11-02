@@ -1,79 +1,98 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import BookFilter from '../components/BookFilter';
 import BookPreview from '../components/BookPreview';
 import {
   filterBooks,
   saveTimestamp,
   changeStatus,
-  fetchBooks, 
-  fetchAuthors
+  fetchBooks,
+  fetchAuthors,
 } from '../actions';
 
 class BookCatalog extends Component {
-
-  handleSelection = (event) => {
-    const filter = event.target.value;
-    this.props.filterBooks(filter)
-    console.log(filter)    
-  }
-  
-  bookResults = (books, filter) => {
-    if (filter === 'All') return books;
-    return books.filter(book => book.author === filter) 
-  }
-
-
-  render() {
-    const {authors, books, filter, api } = this.props
-    
-    if (api !== 'Completed') return <p>getting latest books</p>
-    
-    return (
-      <div>
-        <h2>Catalog</h2>
-        <BookFilter authors={authors} clickHandler={this.handleSelection}/>
-        <ul>
-          {this.bookResults(books, filter).map(book => <BookPreview book={book}/>)}
-        </ul>
-      </div>
-    )
+  componentDidMount() {
+    const { timestamp, changeStatus } = this.props;
+    const updateMs = 60000;
+    const now = Date.now();
+    if ((now - timestamp) > updateMs) {
+      changeStatus('CallingAPI');
+      this.getBooks();
+    }
   }
 
   async getBooks() {
-    const {changeStatus, saveTimestamp, fetchBooks, fetchAuthors } = this.props
+    const {
+      changeStatus, saveTimestamp, fetchBooks, fetchAuthors,
+    } = this.props;
     const url = 'https://api.nytimes.com/svc/books/v3/lists/';
     const end = 'best-sellers/history.json?';
     const key = '&api-key=6ad84e249d054efeaefe1abb8f89df5b';
     try {
-      const data = await axios.get(`${url}${end}${key}`)
-      const books = data.data.results 
-      fetchBooks(books)
-      fetchAuthors(books.map(book => book.author))
-      changeStatus('Completed')
+      const data = await axios.get(`${url}${end}${key}`);
+      const books = data.data.results;
+      fetchBooks(books);
+      fetchAuthors(books.map(book => book.author));
+      changeStatus('Completed');
     } catch (error) {
-      changeStatus('Error')
+      changeStatus('Error');
     }
-    saveTimestamp(Date.now())
+    saveTimestamp(Date.now());
   }
 
-  componentDidMount() {
-    const { timestamp, changeStatus} = this.props;
-    const updateMs = 60000
-    const now = Date.now()
-    if ((now - timestamp) > updateMs) {
-      console.log('Send request');
-      changeStatus('CallingAPI');
-      this.getBooks();
-    }
-
-    // const url = 'https://api.nytimes.com/svc/books/v3/lists/';
-    // const end = 'best-sellers/history.json?';
-    // const key = '&api-key=6ad84e249d054efeaefe1abb8f89df5b';
-    // const data = await axios.get(`${url}${end}${key}`)
-    // console.log(data)
+  bookResults = (books, filter) => {
+    if (filter === 'All') return books;
+    return books.filter(book => book.author === filter);
   }
+
+  handleSelection = event => {
+    const { filterBooks } = this.props;
+    const filter = event.target.value;
+    filterBooks(filter);
+  }
+
+  render() {
+    const {
+      authors, books, filter, api,
+    } = this.props;
+
+    if (api !== 'Completed') return <p>getting latest books</p>;
+
+    return (
+      <div>
+        <h2>Catalog</h2>
+        <BookFilter authors={authors} clickHandler={this.handleSelection} />
+        <ul>
+          {this.bookResults(books, filter).map(
+            book => <BookPreview key={book.objectID} book={book} />,
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
+
+BookCatalog.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
+
+  filter: PropTypes.string.isRequired,
+
+  authors: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
+
+  timestamp: PropTypes.number.isRequired,
+  api: PropTypes.string.isRequired,
+
+  filterBooks: PropTypes.func.isRequired,
+  changeStatus: PropTypes.func.isRequired,
+  saveTimestamp: PropTypes.func.isRequired,
+  fetchAuthors: PropTypes.func.isRequired,
+  fetchBooks: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -89,16 +108,16 @@ const mapDispatchToProps = dispatch => ({
     dispatch(filterBooks(filter));
   },
   saveTimestamp: time => {
-    dispatch(saveTimestamp(time))
+    dispatch(saveTimestamp(time));
   },
   changeStatus: status => {
-    dispatch(changeStatus(status))
+    dispatch(changeStatus(status));
   },
   fetchBooks: books => {
-    dispatch(fetchBooks(books))
+    dispatch(fetchBooks(books));
   },
   fetchAuthors: authors => {
-    dispatch(fetchAuthors(authors))
+    dispatch(fetchAuthors(authors));
   },
 });
 

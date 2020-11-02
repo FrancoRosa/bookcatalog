@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
-import { createStore } from 'redux'
+import { BrowserRouter } from 'react-router-dom';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './index.css';
 import App from './components/App';
@@ -11,7 +11,7 @@ const initialState = {
   books: [
     {
       isbns: [{
-        isbn10: 10
+        isbn10: 10,
       }],
       title: 'Sci-Fi Book',
       author: 'Me',
@@ -19,7 +19,7 @@ const initialState = {
     },
     {
       isbns: [{
-        isbn10: 20
+        isbn10: 20,
       }],
       title: 'Bio of a guide',
       author: 'You',
@@ -27,7 +27,7 @@ const initialState = {
     },
     {
       isbns: [{
-        isbn10: 30
+        isbn10: 30,
       }],
       title: 'Panic',
       author: 'She',
@@ -35,7 +35,7 @@ const initialState = {
     },
     {
       isbns: [{
-        isbn10: 40
+        isbn10: 40,
       }],
       title: 'Panic Kernel',
       author: 'He',
@@ -48,7 +48,7 @@ const initialState = {
     'He',
     'She',
     'They',
-  ]
+  ],
 };
 
 const store = createStore(
@@ -64,5 +64,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
