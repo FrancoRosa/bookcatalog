@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import BookFilter from '../components/BookFilter'
-import { filterBooks } from '../actions'
-import BookPreview from '../components/BookPreview'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import BookFilter from '../components/BookFilter';
+import { filterBooks } from '../actions';
+import BookPreview from '../components/BookPreview';
 
 class BookCatalog extends Component {
 
@@ -28,6 +29,15 @@ class BookCatalog extends Component {
         </ul>
       </div>
     )
+  }
+
+  async componentDidMount() {
+    await console.log('test')
+    // const url = 'https://api.nytimes.com/svc/books/v3/lists/';
+    // const end = 'best-sellers/history.json?';
+    // const key = '&api-key=6ad84e249d054efeaefe1abb8f89df5b';
+    // const data = await axios.get(`${url}${end}${key}`)
+    // console.log(data)
   }
 };
 
