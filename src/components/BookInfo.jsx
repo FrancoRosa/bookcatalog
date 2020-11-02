@@ -12,34 +12,41 @@ const BookInfo = ({ match, books }) => {
     description,
     publisher,
     contributor,
-    isbns,
   } = book[0];
 
+  const keyValue = (key, value) => (
+    <div className="media-content">
+      <p className="title is-5">{key}</p>
+      <p className="subtitle is-5">{value}</p>
+    </div>
+  );
+
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>
-        Author:
-        {author}
-      </p>
-      <p>
-        Contributor:
-        {contributor}
-      </p>
-      <p>
-        Description:
-        {description}
-      </p>
-      <p>
-        Publisher:
-        {publisher}
-      </p>
-      <p>
-        ISBN:
-        {isbns[0].isbn10}
-        ,
-        {isbns[0].isbn10}
-      </p>
+    <div className="card book-info">
+      <div className="card-image">
+        <figure className="image is-128x128">
+          <img src="https://bulma.io/images/placeholders/256x256.png" alt="cover" />
+        </figure>
+      </div>
+      <div className="card-content">
+        <p className="title">{title}</p>
+        <div className="media">
+          <div className="media-left">
+            <figure className="image is-48x48">
+              <img className="is-rounded" src="https://bulma.io/images/placeholders/96x96.png" alt="author" />
+            </figure>
+          </div>
+          {keyValue(' ', contributor)}
+        </div>
+        <div className="content">
+          {keyValue('Description', description)}
+          <br />
+          {keyValue('Author', author)}
+          <br />
+          {keyValue('Publisher', publisher)}
+          <br />
+        </div>
+      </div>
     </div>
   );
 };

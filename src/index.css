@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.title {
+.brand {
   padding: 0 !important;
   margin: 0 1em !important;
 }
@@ -28,4 +28,9 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.book-info {
+  display: flex;
+  justify-content: center;
 }
