@@ -14,9 +14,12 @@ import {
 
 class BookCatalog extends Component {
   componentDidMount() {
-    const { timestamp, changeStatus } = this.props;
+    const { timestamp, changeStatus, filterBooks } = this.props;
     const updateMs = 60000;
     const now = Date.now();
+
+    filterBooks('All');
+
     if ((now - timestamp) > updateMs) {
       changeStatus('CallingAPI');
       this.getBooks();
@@ -58,16 +61,25 @@ class BookCatalog extends Component {
       authors, books, filter, api,
     } = this.props;
 
-    if (api !== 'Completed') return <p>getting latest books</p>;
+    if (api !== 'Completed') {
+      return (
+        <div className="modal is-active">
+          <div className="modal-background" />
+          <div className="modal-content about">
+            <p>Getting latest data</p>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div>
         <BookFilter authors={authors} clickHandler={this.handleSelection} />
-        <ul>
+        <div className="flex-wrap">
           {this.bookResults(books, filter).map(
             book => <BookPreview key={book.objectID} book={book} />,
           )}
-        </ul>
+        </div>
       </div>
     );
   }

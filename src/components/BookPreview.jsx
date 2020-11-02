@@ -4,12 +4,21 @@ import PropTypes from 'prop-types';
 
 const BookPreview = ({ book }) => {
   const route = id => `/book/${id}`;
+  const { title, author, publisher } = book;
   return (
-    <li key={book.author}>
-      <p><Link to={route(book.author)}>{book.title}</Link></p>
-      <p>{book.author}</p>
-      <p>{book.category}</p>
-    </li>
+    <div className="card">
+      <div className="card-content">
+        <div className="content">
+          <Link to={route(author)}>{title}</Link>
+          <p className="headline">{author}</p>
+        </div>
+      </div>
+      <footer className="card-footer">
+        <p className="subtitle is-7">
+          {`Publisher: ${publisher}`}
+        </p>
+      </footer>
+    </div>
   );
 };
 
@@ -17,7 +26,7 @@ BookPreview.propTypes = {
   book: PropTypes.shape({
     title: PropTypes.string,
     author: PropTypes.string,
-    category: PropTypes.string,
+    publisher: PropTypes.string,
   }).isRequired,
 };
 

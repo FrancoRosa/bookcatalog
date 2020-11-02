@@ -21,3 +21,11 @@ code {
   padding: 1em !important;
   margin: 1em !important;
 }
+
+.about {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
