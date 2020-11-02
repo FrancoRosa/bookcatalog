@@ -24,8 +24,12 @@ class BookCatalog extends Component {
     return books.filter(book => book.author === filter) 
   }
 
+
   render() {
-    const {authors, books, filter} = this.props
+    const {authors, books, filter, api } = this.props
+    
+    if (api !== 'Completed') return <p>getting latest books</p>
+    
     return (
       <div>
         <h2>Catalog</h2>
@@ -77,7 +81,7 @@ const mapStateToProps = state => ({
   filter: state.filter,
   authors: state.authors,
   timestamp: state.timestamp,
-  status: state.status,
+  api: state.api,
 });
 
 const mapDispatchToProps = dispatch => ({
