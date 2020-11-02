@@ -25,9 +25,9 @@ export const filterBooks = filter => (
   }
 );
 
-export const saveTimestamp = time => (
+export const saveTimestamp = timestamp => (
   {
-    time,
+    timestamp,
     type: SAVE_TIMESTAMP,
   }
 );

@@ -10,25 +10,33 @@ import rootReducer from './reducers/index';
 const initialState = {
   books: [
     {
-      id: 10,
+      isbns: [{
+        isbn10: 10
+      }],
       title: 'Sci-Fi Book',
       author: 'Me',
       category: 'Sci-Fi',
     },
     {
-      id: 20,
+      isbns: [{
+        isbn10: 20
+      }],
       title: 'Bio of a guide',
       author: 'You',
       category: 'Biography',
     },
     {
-      id: 30,
+      isbns: [{
+        isbn10: 30
+      }],
       title: 'Panic',
       author: 'She',
       category: 'Horror',
     },
     {
-      id: 40,
+      isbns: [{
+        isbn10: 40
+      }],
       title: 'Panic Kernel',
       author: 'He',
       category: 'Horror',
