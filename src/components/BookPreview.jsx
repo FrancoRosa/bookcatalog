@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const BookPreview = ({ book }) => {
+const BookPreview = ({ key, book }) => {
   const route = id => `/book/${id}`;
   const { title, author, publisher } = book;
   return (
-    <div className="card">
+    <div key={key} className="card">
       <div className="card-content">
         <div className="content">
           <Link to={route(author)}>{title}</Link>
@@ -28,6 +28,7 @@ BookPreview.propTypes = {
     author: PropTypes.string,
     publisher: PropTypes.string,
   }).isRequired,
+  key: PropTypes.number.isRequired,
 };
 
 export default BookPreview;
