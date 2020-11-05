@@ -9,6 +9,9 @@ To avoid overloading the API requests are made once every 60sec.
   <a href="https://big-react-calc.herokuapp.com">
     <img width="380" height="720" src="./demo.gif">
   </a>
+  <a href="https://big-react-calc.herokuapp.com">
+    Life demo on heroku
+  </a>
 </p> 
 
 ## Build With
