@@ -77,7 +77,7 @@ class BookCatalog extends Component {
         <BookFilter authors={authors} clickHandler={this.handleSelection} />
         <div className="flex-wrap">
           {this.bookResults(books, filter).map(
-            book => <BookPreview key={book.objectID} book={book} />,
+            book => <BookPreview key={books.indexOf(book)} book={book} />,
           )}
         </div>
       </div>
